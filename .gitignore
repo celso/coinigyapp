@@ -1,0 +1,7 @@
+.DS_Store
+.sass-cache/
+Coinigy-darwin-x64/
+.githelp
+node_modules
+npm-debug.log
+.env
