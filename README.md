@@ -31,6 +31,10 @@ open Coinigy-darwin-x64/
 
 Move the app to your /Applications folder. You're done.
 
+**Download**
+
+You can find pre-built downloadable binaries in the [releases section][4].
+
 ## Disclaimer
 
 I'm not affiliated in any way with Coinigy Inc. I've made this wrapper for my own use. Use it at your own risk. I assume no responsibility or liability for any errors or omissions with this software. The information contained here is provided on an “as is” basis with no guarantees of completeness, accuracy, usefulness or timeliness and without any warranties of any kind whatsoever, express or implied.
@@ -38,3 +42,4 @@ I'm not affiliated in any way with Coinigy Inc. I've made this wrapper for my ow
 [1]: https://github.com/jiahaog/nativefier
 [2]: https://electron.atom.io/
 [3]: https://github.com/celso/coinigyapp/blob/master/inject.js
+[4]: https://github.com/celso/coinigyapp/releases
