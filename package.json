@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "scripts": {
         "test": "exit 0",
-        "build": "./node_modules/nativefier/lib/cli.js --min-width 1200 --min-height=800 -f --disable-context-menu --single-instance --inject inject.js --icon coinigy.icns --internal-urls \".*\" \"https://www.coinigy.com/auth/login\""
+        "build": "./node_modules/nativefier/lib/cli.js --min-width 1200 --min-height=800 -f --disable-context-menu --disable-dev-tools --single-instance --inject inject.js --icon coinigy.icns --internal-urls \".*\" \"https://www.coinigy.com/auth/login\""
     },
     "description": "Coinigy Desktop App",
     "main": "index.js",
