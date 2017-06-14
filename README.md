@@ -6,7 +6,7 @@ It simply uses [Nativefier][1] and [Elecron][2] to build a native wrapper for th
 
 The app runs nothing but Coinigy's own website and code, with the exception of [this][3] locally injected javascript which you can audit.
 
-![Header](https://raw.githubusercontent.com/celso/coinigyapp/master/screnshot.png)
+![Coinigy](https://raw.githubusercontent.com/celso/coinigyapp/master/screenshot.png)
 
 **Features**
 
