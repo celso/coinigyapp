@@ -11,12 +11,14 @@ $().ready(function() {
     }
 
     // override notifications
+    var inform_legacy = inform;
     inform = function(title, body, type) {
         if (Notification.permission === "granted"){
             var notification = new Notification(title, {
                 body: body
             });
         }
+        inform_legacy(title, body, type);
     };
 
 });
