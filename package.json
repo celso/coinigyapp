@@ -1,15 +1,16 @@
 {
     "name": "CoinigyApp",
     "version": "0.0.1",
+    "main": "coinigy.js",
     "scripts": {
         "test": "exit 0",
-        "build": "./node_modules/nativefier/lib/cli.js --min-width 1200 --min-height=800 -f --disable-context-menu --disable-dev-tools --single-instance --inject inject.js --icon coinigy.icns --internal-urls \".*\" \"https://www.coinigy.com/auth/login\""
+        "start": "electron ."
     },
     "description": "Coinigy Desktop App",
-    "main": "index.js",
     "author": "Celso Martinho",
     "license": "MIT",
     "dependencies": {
-        "nativefier": "^7.4.0"
+        "electron": "^1.6.11",
+        "jquery": "^3.2.1"
     }
 }
