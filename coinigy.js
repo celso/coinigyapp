@@ -13,11 +13,22 @@ let mainWindow
 
 function createWindow () {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 800, height: 600})
+    mainWindow = new BrowserWindow({
+        width: 1200,
+        height: 800,
+        minWidth: 1200,
+        minHeight: 800,
+        resizable: true,
+        title: 'Coinigy',
+        webPreferences: {
+            devTools: true,
+            javascript: true,
+            plugins: false
+        }
+    })
 
     // and load the index.html of the app.
     mainWindow.loadURL('https://www.coinigy.com/auth/login');
-    mainWindow.$ = mainWindow.jQuery = require('jquery');
 
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
@@ -31,7 +42,7 @@ function createWindow () {
     })
 
     mainWindow.webContents.on('did-finish-load', function() {
-        mainWindow.show();
+        //mainWindow.show();
         //dialog.showErrorBox('A JavaScript error occured in the browser process', "woa");
         mainWindow.webContents.executeJavaScript(fs.readFileSync('inject.js', 'utf8'));
     });
