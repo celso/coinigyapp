@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ipcRenderer.send('message', ['path',window.location.pathname]);
 
     setInterval(function(){
-        $('.site-settings').hide();
+        // $('.site-settings').hide();
         $('#chatbox').hide();
     }, 1000);
 

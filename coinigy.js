@@ -1,4 +1,4 @@
-const {app, dialog, BrowserWindow, ipcMain} = require('electron')
+const {app, dialog, BrowserWindow, ipcMain, session} = require('electron')
 const windowStateKeeper = require('electron-window-state');
 const path = require('path');
 const url = require('url');
@@ -37,13 +37,23 @@ app.on('ready', function() {
 
     mainWindow.loadURL('https://www.coinigy.com/auth/login');
 
-    // mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()
 
     var menu = require('./menu');
     menu.startMenus(mainWindow);
 
     mainWindow.on('closed', function () {
         mainWindow = null
+    })
+
+    const cookie = {url: 'https://www.coinigy.com', name: 'mp_mixpanel__c', value: '12'}
+
+    // read this: https://github.com/electron/electron/issues/4422
+    session.defaultSession.cookies.remove('https://www.coinigy.com', 'mp_mixpanel__c', (error) => {
+        if (error) console.error(error)
+    })
+    session.defaultSession.cookies.set(cookie, (error) => {
+        if (error) console.error(error)
     })
 
     mainWindow.webContents.on('did-finish-load', function() {
