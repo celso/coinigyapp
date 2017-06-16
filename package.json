@@ -1,11 +1,11 @@
 {
     "name": "Coinigy",
     "version": "0.0.1",
-    "main": "coinigy.js",
+    "main": "app/coinigy.js",
     "scripts": {
         "test": "exit 0",
         "start": "electron .",
-        "build": "./node_modules/electron-packager/cli.js . --icon ./coinigy.icns --overwrite --out ~/Desktop/"
+        "build": "./node_modules/electron-packager/cli.js . --icon ./assets/coinigy.icns --overwrite --out ~/Desktop/"
     },
     "description": "Coinigy Desktop App",
     "author": "Celso Martinho",

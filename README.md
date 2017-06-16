@@ -6,7 +6,7 @@ It uses [Elecron][2] to build a native wrapper for the Coinigy Website, with a f
 
 The app runs nothing but Coinigy's own website and code, with the exception of [this][3] locally injected javascript which you can audit.
 
-![Coinigy](https://raw.githubusercontent.com/celso/coinigyapp/master/screenshot.png)
+![Coinigy](https://raw.githubusercontent.com/celso/coinigyapp/master/assets/screenshot.png)
 
 **Features**
 

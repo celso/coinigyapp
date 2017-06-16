@@ -37,8 +37,6 @@ app.on('ready', function() {
 
     mainWindow.loadURL('https://www.coinigy.com/auth/login');
 
-    mainWindow.webContents.openDevTools()
-
     var menu = require('./menu');
     menu.startMenus(mainWindow);
 
