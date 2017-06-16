@@ -1,16 +1,20 @@
 {
-    "name": "CoinigyApp",
+    "name": "Coinigy",
     "version": "0.0.1",
     "main": "coinigy.js",
     "scripts": {
         "test": "exit 0",
-        "start": "electron ."
+        "start": "electron .",
+        "build": "./node_modules/electron-packager/cli.js . --icon ./coinigy.icns --overwrite --out ~/Desktop/"
     },
     "description": "Coinigy Desktop App",
     "author": "Celso Martinho",
     "license": "MIT",
     "dependencies": {
         "electron": "^1.6.11",
+        "electron-about-window": "^1.6.1",
+        "electron-packager": "^8.7.1",
+        "electron-window-state": "^4.1.1",
         "jquery": "^3.2.1"
     }
 }
