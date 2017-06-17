@@ -1,4 +1,4 @@
-const {app, dialog, BrowserWindow, ipcMain, session} = require('electron')
+const {app, dialog, BrowserWindow, ipcMain, session, Tray} = require('electron')
 const windowStateKeeper = require('electron-window-state');
 const path = require('path');
 const url = require('url');
@@ -40,10 +40,12 @@ app.on('ready', function() {
     mainWindow.loadURL('https://www.coinigy.com/auth/login');
 
     var menu = require('./menu');
-    menu.startMenus(mainWindow, debug);
+    menu.startMenus(app, mainWindow, debug);
 
-    mainWindow.on('closed', function () {
-        mainWindow = null
+    mainWindow.on('close', function (e) {
+        // doesn't quit, just hides windows - osx specific
+        e.preventDefault();
+        mainWindow.hide();
     })
 
     mainWindow.webContents.on('did-finish-load', function() {
@@ -72,15 +74,26 @@ app.on('ready', function() {
 
 });
 
+app.on('activate', function(){
+    mainWindow.show();
+});
+
+app.on('will-quit', function () {
+    // This is a good place to add tests insuring the app is still
+    // responsive and all windows are closed.
+    console.log("will-quit");
+    mainWindow = null;
+});
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
-    app.quit()
+    // app.quit()
 })
 
 app.on('activate', function () {
     if (mainWindow === null) {
-        createWindow()
+        createWindow();
     }
 })
 

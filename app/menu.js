@@ -1,4 +1,4 @@
-const {app, Menu, MenuItem, dialog, BrowserWindow} = require('electron');
+const {Menu, MenuItem, Tray, dialog, BrowserWindow} = require('electron');
 const openAboutWindow = require('electron-about-window').default;
 const path = require('path');
 
@@ -15,11 +15,18 @@ exports.MENU_FAVORITES = 4;
 exports.MENU_WINDOW = 5;
 exports.MENU_HELP = 6;
 
-exports.startMenus = function(win, debug) {
+exports.startMenus = function(app, win, debug) {
 
     this.win = win;
     this.debug = debug;
     this.menuItems = []
+
+    tray = new Tray(path.join(__dirname, '../assets/coinigy_menubar.png'));
+    tray.setToolTip('Coinigy')
+
+    tray.on('click', function() {
+        win.show();
+    });
 
     this.menuItems[this.MENU_EDIT]={
         label: 'Edit',
@@ -203,10 +210,17 @@ exports.startMenus = function(win, debug) {
                 {role: 'hideothers'},
                 {role: 'unhide'},
                 {type: 'separator'},
-                {role: 'quit'},
                 {
                     label: 'Logout',
                     click () { win.webContents.send("message", ['menu','logout']); }
+                },
+                {
+                    label: 'Quit',
+                    accelerator: 'CommandOrControl+q',
+                    click () {
+                        app.quit();
+                        app.exit();
+                    }
                 },
             ]
         };
