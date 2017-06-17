@@ -2,6 +2,7 @@
 .sass-cache/
 Coinigy-darwin-x64/
 .githelp
+site/
 node_modules
 npm-debug.log
 .env
