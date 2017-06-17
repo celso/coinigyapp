@@ -10,7 +10,9 @@ The app runs nothing but Coinigy's own website and code, with the exception of [
 
 **Features**
 
- * Runs independently from your browser, as any desktop app, allowing access through normal app-switching, independent full-screen, dock placement, etc.
+ * Runs independently from your browser, as any desktop app, allowing background running, access through normal app-switching, independent full-screen, dock placement, etc.
+ * Quick access to Coinigy's features, including your favorite markets, using standard app menus and shortcuts
+ * Menubar icon for quick access
  * Uses native desktop notifications along with Coinigy's web-based, on-screen.
 
 **Caveats**
