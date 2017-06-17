@@ -4,7 +4,7 @@
     "main": "app/coinigy.js",
     "scripts": {
         "test": "exit 0",
-        "start": "electron .",
+        "start": "./node_modules/electron/cli.js . dev",
         "build": "./node_modules/electron-packager/cli.js . --icon ./assets/coinigy.icns --overwrite --out ~/Desktop/"
     },
     "description": "Coinigy Desktop App",

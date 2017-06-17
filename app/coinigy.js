@@ -6,6 +6,8 @@ const fs = require('fs');
 
 let mainWindow;
 
+let debug = process.argv[2] && process.argv[2]=='dev' ? true : false;
+
 app.on('ready', function() {
     let mainWindowState = windowStateKeeper({
         defaultWidth: 1260,
@@ -38,25 +40,18 @@ app.on('ready', function() {
     mainWindow.loadURL('https://www.coinigy.com/auth/login');
 
     var menu = require('./menu');
-    menu.startMenus(mainWindow);
+    menu.startMenus(mainWindow, debug);
 
     mainWindow.on('closed', function () {
         mainWindow = null
     })
 
-    const cookie = {url: 'https://www.coinigy.com', name: 'mp_mixpanel__c', value: '12'}
-
-    // read this: https://github.com/electron/electron/issues/4422
-    session.defaultSession.cookies.remove('https://www.coinigy.com', 'mp_mixpanel__c', (error) => {
-        if (error) console.error(error)
-    })
-    session.defaultSession.cookies.set(cookie, (error) => {
-        if (error) console.error(error)
-    })
-
     mainWindow.webContents.on('did-finish-load', function() {
         ipcMain.on('message', (event, arg) => {
             switch(arg[0]) {
+                case "favorites":
+                    menu.addFavorites(arg[1]);
+                    break;
                 case "notification":
                     // electron has no mature notification apis for the main process yet
                     // done via the renderer process
@@ -68,17 +63,9 @@ app.on('ready', function() {
                     }
                     break;
                 case "path":
-                    if(arg[1].startsWith('/main/')) {
-                        menu.itemEnableAll(3,true);
-                    }
-                    else
-                    {
-                        menu.itemEnableAll(3,false);
-                    }
-                    console.log(arg[1]);
+                    menu.itemEnableAll(menu.MENU_NAVIGATION, arg[1].startsWith('/main/') ? true : false);
                     break;
             }
-            console.log(arg);  // prints "ping"
         });
     });
 
