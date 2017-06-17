@@ -74,10 +74,6 @@ app.on('ready', function() {
 
 });
 
-app.on('activate', function(){
-    mainWindow.show();
-});
-
 app.on('will-quit', function () {
     // This is a good place to add tests insuring the app is still
     // responsive and all windows are closed.
@@ -95,5 +91,12 @@ app.on('activate', function () {
     if (mainWindow === null) {
         createWindow();
     }
+    else
+    {
+        mainWindow.show();
+    }
 })
 
+app.on("browser-window-focus", () => {
+    mainWindow.show();
+});
