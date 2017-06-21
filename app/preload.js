@@ -82,6 +82,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     },1000);
 
+    // marketdata updates
+    setInterval(function(){
+        const marketData = {
+            lasthigh: $(".lastHigh").html(),
+            lastlow: $(".lastLow").html(),
+            lastvolume: $(".lastVolume").html(),
+            askprice: current_ask_price,
+            bidprice: current_bid_price,
+            marketname: market_name,
+            exchangename: exchange_name
+        };
+        ipcRenderer.send('message', ['mdata', marketData]);
+    },10000);
+
     setTimeout(function(){
         // hide markets column as default
         /*

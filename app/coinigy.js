@@ -54,6 +54,9 @@ app.on('ready', function() {
                 case "favorites":
                     menu.addFavorites(arg[1]);
                     break;
+                case "mdata":
+                    menu.rebuildTrayItems(arg[1]);
+                    break;
                 case "notification":
                     // electron has no mature notification apis for the main process yet
                     // done via the renderer process
