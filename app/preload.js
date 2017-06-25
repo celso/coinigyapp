@@ -3,8 +3,10 @@ const {ipcRenderer} = require('electron')
 ipcRenderer.on('message', (event, arg) => {
     switch(arg[0]) {
         case "market":
-            $("#exchange_list").find("[data-exchange='" + arg[1] + "']").click();
-            $("#market_list").find("[data-exchange='" + arg[1] + "'][data-market='" + arg[2] + "']").click();
+            $('#market_search').focus().dblclick();
+            $("#exchange_list").find("[data-exchange='" + arg[1] + "']").click(); // clicks exchange
+            $("#market_list").find("[data-exchange='" + arg[1] + "'][data-market='" + arg[2] + "']").click(); // clicks market pair
+            update_favs = true; // update favorites menu
             break;
         case "panel":
             switch(arg[1]) {
@@ -67,20 +69,30 @@ ipcRenderer.on('message', (event, arg) => {
 
 document.addEventListener('DOMContentLoaded', function() {
 
+    var marketData = getMarketData();
+
     ipcRenderer.send('message', ['system','pageloaded']);
     ipcRenderer.send('message', ['path',window.location.pathname]);
 
     update_favs = true;
 
     setInterval(function(){
-        if(!$(".site-settings").hasClass("active")) {
+        marketData = getMarketData(); // update the market data
+
+        if(!$(".site-settings").hasClass("active")) { // keep hiding the settings button, it's annoying
             $('.site-settings').hide();
         }
-        if(favoritesData && update_favs==true) {
-            ipcRenderer.send('message', ['favorites', favoritesData]);
+
+        if(favoritesData!=undefined && update_favs==true) { // time to rebuilt the favorites menu
+            ipcRenderer.send('message', ['favorites', favoritesData, marketData.exchangename, marketData.marketname]);
             update_favs=false;
         }
     },1000);
+
+    // marketdata updates
+    setInterval(function(){
+        ipcRenderer.send('message', ['mdata', marketData]);
+    },10000);
 
     setTimeout(function(){
         // hide markets column as default
@@ -151,4 +163,17 @@ function cookie(d) {
         }
     }
     return ""
+}
+
+function getMarketData() {
+    const md = {
+        lasthigh: $(".lastHigh").html(),
+        lastlow: $(".lastLow").html(),
+        lastvolume: $(".lastVolume").html(),
+        askprice: current_ask_price,
+        bidprice: current_bid_price,
+        marketname: market_name,
+        exchangename: exchange_name
+    };
+    return(md);
 }

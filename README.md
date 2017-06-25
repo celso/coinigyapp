@@ -2,7 +2,7 @@
 
 This is a non official Coinigy App for the Desktop.
 
-It uses [Elecron][2] to build a native wrapper for the Coinigy Website, with a few tweaks.
+It uses [Electron][2] to build a native wrapper for the Coinigy Website, with a few tweaks.
 
 The app runs nothing but Coinigy's own website and code, with the exception of [this][3] locally injected javascript which you can audit.
 

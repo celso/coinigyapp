@@ -52,7 +52,10 @@ app.on('ready', function() {
         ipcMain.on('message', (event, arg) => {
             switch(arg[0]) {
                 case "favorites":
-                    menu.addFavorites(arg[1]);
+                    menu.addFavorites(arg[1], arg[2], arg[3]);
+                    break;
+                case "mdata":
+                    menu.rebuildTrayItems(arg[1]);
                     break;
                 case "notification":
                     // electron has no mature notification apis for the main process yet

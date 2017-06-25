@@ -1,6 +1,6 @@
 {
     "name": "Coinigy",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "main": "app/coinigy.js",
     "scripts": {
         "test": "exit 0",

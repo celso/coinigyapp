@@ -5,6 +5,7 @@ const path = require('path');
 exports.menu = false;
 exports.win = false;
 exports.menuItems = false;
+exports.tray = false;
 exports.debug = false;
 
 exports.MENU_ABOUT = 0;
@@ -21,12 +22,8 @@ exports.startMenus = function(app, win, debug) {
     this.debug = debug;
     this.menuItems = []
 
-    tray = new Tray(path.join(__dirname, '../assets/coinigy_menubar.png'));
-    tray.setToolTip('Coinigy')
-
-    tray.on('click', function() {
-        win.show();
-    });
+    this.tray =  new Tray(path.join(__dirname, '../assets/coinigy_menubar.png'));
+    this.tray.setToolTip('Coinigy')
 
     this.menuItems[this.MENU_EDIT]={
         label: 'Edit',
@@ -251,7 +248,30 @@ exports.startMenus = function(app, win, debug) {
     Menu.setApplicationMenu(this.menu);
 }
 
-exports.addFavorites = function(f) {
+exports.rebuildTrayItems = function(md) {
+
+    var win = this.win;
+
+    var items = [
+        {label: 'Open app', click () { win.show(); }},
+        {type: 'separator'}
+    ];
+
+    items.push({ label: md.exchangename + ' ' + md.marketname, enabled: false });
+    items.push({ label: 'Bid price: ' + md.bidprice, enabled: false });
+    items.push({ label: 'Ask price: ' + md.askprice, enabled: false });
+    items.push({ label: 'Last high: ' + md.lasthigh, enabled: false });
+    items.push({ label: 'Last low: ' + md.lastlow, enabled: false });
+    items.push({ label: 'Last volume: ' + md.lastvolume, enabled: false });
+
+    this.tray.setContextMenu(
+        Menu.buildFromTemplate(items)
+    );
+
+}
+
+exports.addFavorites = function(f, curr_exchange, curr_market) {
+
     this.menuItems[4].submenu = [];
     var xc=[];
     var win = this.win;
@@ -269,7 +289,8 @@ exports.addFavorites = function(f) {
                     var click = clickHandler(code, market);
                     sub.push({
                         label: f[n].mkt_name,
-                        celso: 'celso',
+                        type: 'checkbox',
+                        checked: f[i].exch_name == curr_exchange && f[n].mkt_name == curr_market ? true : false,
                         click: click
                     });
                 }
