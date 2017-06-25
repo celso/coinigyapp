@@ -270,7 +270,8 @@ exports.rebuildTrayItems = function(md) {
 
 }
 
-exports.addFavorites = function(f) {
+exports.addFavorites = function(f, curr_exchange, curr_market) {
+
     this.menuItems[4].submenu = [];
     var xc=[];
     var win = this.win;
@@ -288,7 +289,8 @@ exports.addFavorites = function(f) {
                     var click = clickHandler(code, market);
                     sub.push({
                         label: f[n].mkt_name,
-                        celso: 'celso',
+                        type: 'checkbox',
+                        checked: f[i].exch_name == curr_exchange && f[n].mkt_name == curr_market ? true : false,
                         click: click
                     });
                 }
